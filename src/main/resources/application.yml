@@ -1,0 +1,15 @@
+server:
+  port: 8097
+spring:
+  application:
+    name: Flight Search API
+  datasource:
+    url: jdbc:postgresql://${POSTGRESQL_HOST:localhost}:5432/flight-search
+    username: ${POSTGRESQL_USER:postgres}
+    password: ${POSTGRESQL_PASSWORD:tunalcasepw}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    hibernate:
+      ddl-auto: update
