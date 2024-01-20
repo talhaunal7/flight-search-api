@@ -107,4 +107,62 @@ public class Flight {
                ", amount=" + amount +
                '}';
     }
+
+
+    public static final class Builder {
+        private Long id;
+        private Instant departureDate;
+        private Instant returnDate;
+        private Airport departureAirport;
+        private Airport returnAirport;
+        private BigDecimal amount;
+
+        private Builder() {
+        }
+
+        public static Builder aFlight() {
+            return new Builder();
+        }
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder departureDate(Instant departureDate) {
+            this.departureDate = departureDate;
+            return this;
+        }
+
+        public Builder returnDate(Instant returnDate) {
+            this.returnDate = returnDate;
+            return this;
+        }
+
+        public Builder departureAirport(Airport departureAirport) {
+            this.departureAirport = departureAirport;
+            return this;
+        }
+
+        public Builder returnAirport(Airport returnAirport) {
+            this.returnAirport = returnAirport;
+            return this;
+        }
+
+        public Builder amount(BigDecimal amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public Flight build() {
+            Flight flight = new Flight();
+            flight.setId(id);
+            flight.setDepartureDate(departureDate);
+            flight.setReturnDate(returnDate);
+            flight.setDepartureAirport(departureAirport);
+            flight.setReturnAirport(returnAirport);
+            flight.setAmount(amount);
+            return flight;
+        }
+    }
 }
