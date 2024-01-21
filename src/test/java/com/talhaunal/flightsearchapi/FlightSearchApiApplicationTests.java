@@ -10,8 +10,4 @@ class FlightSearchApiApplicationTests {
     void contextLoads() {
     }
 
-    @Test
-    void test() {
-
-    }
 }
