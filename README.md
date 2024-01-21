@@ -10,7 +10,7 @@
 Clone and run project with docker compose.
 
 ```bash
-  $ docker compose up
+  $ docker-compose up
 ```
 
 Application will run on [http://localhost:8097](http://localhost:8097)
@@ -20,11 +20,11 @@ Application will run on [http://localhost:8097](http://localhost:8097)
 To send a request, you need to sign up choosing one of the `USER` and `ADMIN` roles.
 <br>
 <br>
-After signing up, you can use the generated token to make request on;
+After signing up, you have to add `Authorization` header as `Bearer your-token` to make request on;
 <br>
 -<ins>CRUD</ins> operation if you are an `ADMIN`
 <br>
--<ins>Search flight</ins> operation if you are a `USER`
+-<ins>Search flight</ins> operation if you are a `USER` or `ADMIN`
 
 | Action         | localhost:8097/         | Example Request                                                    | 
 |----------------|-------------------------|--------------------------------------------------------------------| 
@@ -35,7 +35,8 @@ After signing up, you can use the generated token to make request on;
 
 ## Documentation
 
-[Swagger UI](http://localhost:8097) `http://localhost:8097/swagger-ui/index.html`- Documentation & Testing
+[Swagger UI](http://localhost:8097/swagger-ui/index.html) `http://localhost:8097/swagger-ui/index.html`- Documentation &
+Testing
 <br>
 <br>
 
