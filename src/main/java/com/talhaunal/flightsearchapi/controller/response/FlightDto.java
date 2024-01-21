@@ -1,11 +1,13 @@
 package com.talhaunal.flightsearchapi.controller.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.talhaunal.flightsearchapi.domain.Airport;
 import com.talhaunal.flightsearchapi.domain.Flight;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class FlightDto {
     private Long id;
 
