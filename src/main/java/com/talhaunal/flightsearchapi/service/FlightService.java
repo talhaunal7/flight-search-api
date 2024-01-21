@@ -73,22 +73,32 @@ public class FlightService {
                                   Long returnAirportId,
                                   LocalDate departureDate,
                                   LocalDate returnDate) {
-        Airport departureAirport = airportService.findById(departureAirportId);
-        Airport returnAirport = null;
-        if (returnAirportId != null && returnDate != null) {
-            returnAirport = airportService.findById(returnAirportId);
-        }
         Instant departureDateStartOfDay = departureDate.atStartOfDay().toInstant(ZoneOffset.UTC);
         Instant departureDateEndOfDay = departureDateStartOfDay.plus(1, ChronoUnit.DAYS);
+        Instant returnDateStartOfDay = null;
+        Instant returnDateEndOfDay = null;
 
-        List<Flight> flights = flightRepository.findAllByDepartureAirportAndReturnAirportAndDepartureDateGreaterThanEqualAndDepartureDateLessThan(
-                departureAirport,
-                returnAirport,
+        if (returnAirportId != null && returnDate != null) {
+            returnDateStartOfDay = returnDate.atStartOfDay().toInstant(ZoneOffset.UTC);
+            returnDateEndOfDay = returnDateStartOfDay.plus(1, ChronoUnit.DAYS);
+
+            List<Flight> flights = flightRepository.searchTwoWay(
+                    departureAirportId,
+                    returnAirportId,
+                    departureDateStartOfDay,
+                    departureDateEndOfDay,
+                    returnDateStartOfDay,
+                    returnDateEndOfDay);
+            return flights.stream().map(FlightDto::convertToDto).toList();
+        }
+
+        List<Flight> flights = flightRepository.searchOneWay(
+                departureAirportId,
                 departureDateStartOfDay,
-                departureDateEndOfDay);
+                departureDateEndOfDay
+        );
 
         return flights.stream().map(FlightDto::convertToDto).toList();
-
     }
 
     private Flight findById(Long id) {
