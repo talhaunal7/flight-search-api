@@ -5,6 +5,7 @@ import com.talhaunal.flightsearchapi.controller.request.AirportUpdateRequest;
 import com.talhaunal.flightsearchapi.controller.response.AirportDto;
 import com.talhaunal.flightsearchapi.service.AirportService;
 import org.slf4j.Logger;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -25,6 +26,7 @@ public class AirportController {
 
     @ResponseStatus(CREATED)
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void create(@RequestBody AirportCreateRequest request) {
         log.info("Creating airport: {}", request);
         airportService.create(request);
@@ -32,6 +34,7 @@ public class AirportController {
 
     @ResponseStatus(OK)
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public AirportDto get(@PathVariable Long id) {
         log.info("Getting airport: {}", id);
         return airportService.get(id);
@@ -39,6 +42,7 @@ public class AirportController {
 
     @ResponseStatus(OK)
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(@PathVariable Long id) {
         log.info("Deleting airport: {}", id);
         airportService.delete(id);
@@ -46,6 +50,7 @@ public class AirportController {
 
     @ResponseStatus(OK)
     @PutMapping(("/{id}"))
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void update(@PathVariable Long id, @RequestBody AirportUpdateRequest request) {
         log.info("Updating airport: {}", request);
         airportService.update(id, request);
